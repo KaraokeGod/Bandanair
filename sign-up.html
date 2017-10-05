@@ -9,6 +9,76 @@
         <link rel="stylesheet" href="assets/css/signup.css">
         <link rel="stylesheet" href="assets/css/main.css">
         <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <style>
+        .error {color: #FF0000;}
+        label {display: inline-block; text-align:right;}
+        </style>
+        <script>
+          function validateForm() {
+              var email = document.forms["msform"]["email"].value;
+              var name = document.forms["msform"]["name"].value;
+              var zip = document.forms["msform"]["zip"].value;
+              var pass = document.forms["msform"]["pass"].value;
+              var cpass = document.forms["msform"]["cpass"].value;
+              var phone = document.forms["msform"]["phone"].value;
+              var username = document.forms["msform"]["username"].value;
+              var city = document.forms["msform"]["city"].value;
+              var state = document.forms["msform"]["state"].value;
+              var country = document.forms["msform"]["country"].value;
+              var twitter = document.forms["msform"]["twitter"].value;
+              var fb = document.forms["msform"]["facebook"].value;
+              var googplus = document.forms["msform"]["gplus"].value;
+
+              if (email=="" || username=="" || pass=="" || cpass=="" || name=="" || phone=="" || city=="" || state=="" || country=="" || zip=="") {
+                  alert("Some required fields have not been filled");
+                  return false;
+              }
+
+              if (email.indexOf("@")==-1 || email.indexOf(".")==-1) {
+                  alert("Email Field must contain '@' and '.'");
+                  return false;
+              }
+
+              if (!(/^[a-zA-Z\s]*$/.test(name))) {
+                  alert("Name Field must not contain numbers.");
+                  return false;
+              }
+
+              if (!(/^\d+$/.test(zip))) {
+                  alert("Zip Code Field must only contain numbers.");
+                  return false;
+              }
+
+              if (pass!=cpass) {
+                  alert("Confirm Password Field does not match Password Field");
+                  return false;
+              }
+
+              var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+              if (!(phoneno.test(phone))) {
+                  alert("Phone number must contain only digits and match one of these formats: 'XXXXXXXXXX' 'XXX-XXX-XXXX' 'XXX.XXX.XXXX' 'XXX XXX XXXX'");
+                  return false;
+              }
+
+              var validURL = /\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i;
+              if (!(validURL.test(twitter)) && twitter != "") {
+                  alert("Twitter Field must be a valid URL or empty.");
+                  return false;
+              }
+
+              if (!(validURL.test(fb)) && fb != "") {
+                  alert("Facebook Field must be a valid URL or empty.");
+                  return false;
+              }
+
+              if (!(validURL.test(googplus)) && googplus != "") {
+                  alert("Google Plus Field must be a valid URL or empty.");
+                  return false;
+              }
+
+
+          }
+        </script>
     </head>
     <body class="no-sidebar">
         <div id="page-wrapper">
@@ -38,25 +108,27 @@
             </div>
 
             <!-- multistep form -->
-            <form id="msform">
+            <form id="msform" action="RegisterUser.php" onsubmit="return validateForm()" method="post">
                 <!-- progressbar -->
                 <ul id="progressbar">
                     <li class="active">Account Setup</li>
                     <li>Social Profiles</li>
                     <li>Personal Details</li>
                 </ul>
+                <!--<p><span class="error">* required field.</span></p>-->
                 <!-- fieldsets -->
                 <fieldset>
                     <h2 class="fs-title">Create your account</h2>
-                    <h3 class="fs-subtitle">This is step 1</h3>
+                    <h3 class="fs-subtitle">New Credentials</h3>
                     <input type="text" name="email" placeholder="Email" />
+                    <input type="text" name="username" placeholder="Username" />
                     <input type="password" name="pass" placeholder="Password" />
                     <input type="password" name="cpass" placeholder="Confirm Password" />
                     <input type="button" name="next" class="next action-button" value="Next" />
                 </fieldset>
                 <fieldset>
                     <h2 class="fs-title">Social Profiles</h2>
-                    <h3 class="fs-subtitle">Your presence on the social network</h3>
+                    <h3 class="fs-subtitle">Your presence on social networks</h3>
                     <input type="text" name="twitter" placeholder="Twitter" />
                     <input type="text" name="facebook" placeholder="Facebook" />
                     <input type="text" name="gplus" placeholder="Google Plus" />
@@ -66,13 +138,18 @@
                 <fieldset>
                     <h2 class="fs-title">Personal Details</h2>
                     <h3 class="fs-subtitle">We will never sell it</h3>
-                    <input type="text" name="fname" placeholder="First Name" />
-                    <input type="text" name="lname" placeholder="Last Name" />
-                    <input type="text" name="phone" placeholder="Phone" />
-                    <textarea name="address" placeholder="Address"></textarea>
+                    <input type="text" name="name" placeholder="Your Name" required/>
+                    <!--<input type="text" name="name" placeholder="Your Age" required/>-->
+                    <input type="text" name="phone" placeholder="Phone Number" required/>
+                    <input name="address" placeholder="Address" required/>
+                    <input type="text" name="city" placeholder="City" required/>
+                    <input type="text" name="state" placeholder="State" required/>
+                    <input type="text" name="zip" placeholder="Zip Code" required/>
+                    <input type="text" name="country" placeholder="Country" required/>
                     <input type="button" name="previous" class="previous action-button" value="Previous" />
-                    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+                    <button href="RegisterUser.php" type="submit">Submit</button>
                 </fieldset>
+
             </form>
         </div>
             <!-- Footer -->
