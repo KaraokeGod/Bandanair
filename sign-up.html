@@ -76,6 +76,11 @@
                   return false;
               }
 
+							testVal = /^[A-Za-z0-9!@#$%^&*()_]{6,}/;
+							if(!testVal.test(pass)) {
+                alert("Password must be at least 6 alphanumeric and/or special characters");
+								return false;
+							}
 
           }
         </script>

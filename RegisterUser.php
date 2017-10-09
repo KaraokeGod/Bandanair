@@ -43,11 +43,10 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         </header>
       </div>
 
-       <center><h2>Success!</h2></center>
          <div id="banner-wrapper">
            <div id="banner" class="box container">
              <div class="row">
-               <div class="7u 12u(medium)">
+               <!--<div class="5u 12u(medium)">-->
 
           				<p style="font-size: 35px"> <?php
 
@@ -77,36 +76,41 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                       $zipcode = $_POST['zip'];
                       $country = $_POST['country'];
                       $hashed_password= hash('sha256',$password);
-                      
-                      // session_start();
-                      // $_SESSION["Email"] = $email;
-                      $sql="INSERT INTO users (Name, Email, Address, City, State, ZipCode, Username, Password, Twitter, Facebook, GooglePlus, PhoneNumber, Country)
-                      VALUES  ('$name', '$email', '$address', '$city','$state','$zipcode', '$username', '$hashed_password', '$twitter', '$facebook', '$gplus', '$phone', '$country')";
-                      if (!mysqli_query($con,$sql))
-                      {
-                        die('Error: ' . mysqli_error($con));
+
+                      $sql = mysqli_query($con, "SELECT * FROM users WHERE Username='$username'");
+                      if(mysqli_num_rows($sql)>=1){
+                        echo "<center><h2 style='color: red'>Registration Failure</h2></center>";
+                        echo "<h2>Username <em><strong>$username</strong></em> has already been taken.</h2>";
+                        echo "<a href='#' class='button big icon fa-arrow-circle-left' onclick='window.history.back();'><i>Back</i></a>";
                       }
-                      else
-                      {
-                      //echo "Welcome $name. You are registered as $username.";
-                      //echo "You have successfully registered as $username.";
-                      //echo "<h1>hello $username</h1>";
 
-
-                      echo "<h2><strong>Congratulations</strong> $username</h2>";
-                      echo "<p>You are now a member of <strong>BandanAir!</strong></p>";
-                    }
+                      else{
+                          // session_start();
+                          // $_SESSION["Email"] = $email;
+                          $sql="INSERT INTO users (Name, Email, Address, City, State, ZipCode, Username, Password, Twitter, Facebook, GooglePlus, PhoneNumber, Country)
+                          VALUES  ('$name', '$email', '$address', '$city','$state','$zipcode', '$username', '$hashed_password', '$twitter', '$facebook', '$gplus', '$phone', '$country')";
+                          if (!mysqli_query($con,$sql))
+                          {
+                            die('Error: ' . mysqli_error($con));
+                          }
+                          else
+                          {
+                          //echo "Welcome $name. You are registered as $username.";
+                          //echo "You have successfully registered as $username.";
+                          //echo "<h1>hello $username</h1>";
+                          echo "<center><h2 style='color: green'>Success!</h2></center>";
+                          echo "<p> </p>";
+                          echo "<h2><strong>Congratulations</strong> $username</h2>";
+                          echo "<p>You are now a member of <strong>BandanAir!</strong></p>";
+                          echo "<p> </p>";
+                          echo "<a href='#' class='button big icon fa-arrow-circle-right'>Browse Products</a>";
+                          echo "<a href='#' class='button alt big icon fa-question-circle'>Your Profile</a>";
+                        }
+                      }
                     mysqli_close($con);
                     ?>
                   </p>
 
-                </div>
-                <div class="5u 12u(medium)">
-                  <ul>
-                    <li><a href="#" class="button big icon fa-arrow-circle-right">Browse Products</a></li>
-                    <li><a href="#" class="button alt big icon fa-question-circle">Your Profile</a></li>
-                  </ul>
-                </div>
               </div>
             </div>
           </div>
