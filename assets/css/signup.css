@@ -80,9 +80,10 @@ html {
 }
 #progressbar li {
 	list-style-type: none;
-	color: black;
+	color: white;
 	text-transform: uppercase;
 	font-size: 12px;
+	font-weight: bold;
 	width: 33.33%;
 	float: left;
 	position: relative;
