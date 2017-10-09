@@ -108,65 +108,117 @@
             </div>
 
             <!-- multistep form -->
-            <form id="msform" action="RegisterUser.php" onsubmit="return validateForm()" method="post">
-                <!-- progressbar -->
-                <ul id="progressbar">
-                    <li class="active">Account Setup</li>
-                    <li>Social Profiles</li>
-                    <li>Personal Details</li>
-                </ul>
-                <!--<p><span class="error">* required field.</span></p>-->
-                <!-- fieldsets -->
-                <fieldset>
-                    <h2 class="fs-title">Create your account</h2>
-                    <h3 class="fs-subtitle">New Credentials</h3>
-                    <input type="text" name="email" placeholder="Email" />
-                    <input type="text" name="username" placeholder="Username" />
-                    <input type="password" name="pass" placeholder="Password" />
-                    <input type="password" name="cpass" placeholder="Confirm Password" />
-                    <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
-                <fieldset>
-                    <h2 class="fs-title">Social Profiles</h2>
-                    <h3 class="fs-subtitle">Your presence on social networks</h3>
-                    <input type="text" name="twitter" placeholder="Twitter" />
-                    <input type="text" name="facebook" placeholder="Facebook" />
-                    <input type="text" name="gplus" placeholder="Google Plus" />
-                    <input type="button" name="previous" class="previous action-button" value="Previous" />
-                    <input type="button" name="next" class="next action-button" value="Next" />
-                </fieldset>
-                <fieldset>
-                    <h2 class="fs-title">Personal Details</h2>
-                    <h3 class="fs-subtitle">We will never sell it</h3>
-                    <input type="text" name="name" placeholder="Your Name" required/>
-                    <!--<input type="text" name="name" placeholder="Your Age" required/>-->
-                    <input type="text" name="phone" placeholder="Phone Number" required/>
-                    <input name="address" placeholder="Address" required/>
-                    <input type="text" name="city" placeholder="City" required/>
-                    <input type="text" name="state" placeholder="State" required/>
-                    <input type="text" name="zip" placeholder="Zip Code" required/>
-                    <input type="text" name="country" placeholder="Country" required/>
-                    <input type="button" name="previous" class="previous action-button" value="Previous" />
-                    <button href="RegisterUser.php" type="submit">Submit</button>
-                </fieldset>
+            <div id="background-wrapper2">
+              <form id="msform" action="RegisterUser.php" onsubmit="return validateForm()" method="post">
+                  <!-- progressbar -->
+                  <ul id="progressbar">
+                      <li class="active">Account Setup</li>
+                      <li>Social Profiles</li>
+                      <li>Personal Details</li>
+                  </ul>
+                  <!--<p><span class="error">* required field.</span></p>-->
+                  <!-- fieldsets -->
+                  <fieldset>
+                      <h2 class="fs-title">Create your account</h2>
+                      <h3 class="fs-subtitle">New Credentials</h3>
+                      <input type="text" name="email" placeholder="Email" />
+                      <input type="text" name="username" placeholder="Username" />
+                      <input type="password" name="pass" placeholder="Password" />
+                      <input type="password" name="cpass" placeholder="Confirm Password" />
+                      <input type="button" name="next" class="next action-button" value="Next" />
+                  </fieldset>
+                  <fieldset>
+                      <h2 class="fs-title">Social Profiles</h2>
+                      <h3 class="fs-subtitle">Your presence on social networks</h3>
+                      <input type="text" name="twitter" placeholder="Twitter" />
+                      <input type="text" name="facebook" placeholder="Facebook" />
+                      <input type="text" name="gplus" placeholder="Google Plus" />
+                      <input type="button" name="previous" class="previous action-button" value="Previous" />
+                      <input type="button" name="next" class="next action-button" value="Next" />
+                  </fieldset>
+                  <fieldset>
+                      <h2 class="fs-title">Personal Details</h2>
+                      <h3 class="fs-subtitle">We will never sell it</h3>
+                      <input type="text" name="name" placeholder="Your Name" required/>
+                      <!--<input type="text" name="name" placeholder="Your Age" required/>-->
+                      <input type="text" name="phone" placeholder="Phone Number" required/>
+                      <input name="address" placeholder="Address" required/>
+                      <input type="text" name="city" placeholder="City" required/>
+                      <input type="text" name="state" placeholder="State" required/>
+                      <input type="text" name="zip" placeholder="Zip Code" required/>
+                      <input type="text" name="country" placeholder="Country" required/>
+                      <input type="button" name="previous" class="previous action-button" value="Previous" />
+                      <button href="RegisterUser.php" type="submit">Submit</button>
+                  </fieldset>
 
-            </form>
+              </form>
+            </div>
         </div>
             <!-- Footer -->
-            <div id="footer-wrapper">
-              <footer id="footer" class="container">
+        <div id="footer-wrapper">
+          <footer id="footer" class="container">
+            <div class="row">
+              <div class="3u 6u(medium) 12u$(small)">
+                <a href="index.html"><img src="images/BandanAir1.png" width="252" height="156.6" alt="" /></a>
+              </div>
+              <div class="3u 6u$(medium) 12u$(small)">
 
-                <div class="row">
-                  <div class="12u">
-                    <div id="copyright">
-                      <ul class="menu">
-                        <li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </footer>
+                <!-- Links -->
+                  <section class="widget links">
+                    <h3>Affiliated Events</h3>
+                    <ul class="style2">
+                      <li><a href="https://ultramusicfestival.com/">Ultra Music Festival</a></li>
+                      <li><a href="https://lasvegas.electricdaisycarnival.com/">EDC Music Festival</a></li>
+                      <li><a href="http://movement.us/">Movement Music Festival</a></li>
+                    </ul>
+                  </section>
+
+              </div>
+              <div class="3u 6u(medium) 12u$(small)">
+
+                <!-- Links -->
+                  <section class="widget links">
+                    <h3>Sitemap</h3>
+                    <ul class="style2">
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="about.html">About Us</a></li>
+                      <li><a href="founders.html">Founders</a></li>
+                      <li><a href="sign-up.html">Sign Up</a></li>
+                      <li><a href="login.html">Login</a></li>
+                    </ul>
+                  </section>
+
+              </div>
+              <div class="3u 6u$(medium) 12u$(small)">
+
+                <!-- Contact -->
+                  <section class="widget contact last">
+                    <h3>Contact Us</h3>
+                    <ul>
+                      <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                      <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                      <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                      <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+                    </ul>
+                    <p>1900 Jefferson Park Avenue Apt 6<br />
+                    Charlottesville, VA 22903<br />
+                    (571) 201-9700</p>
+                  </section>
+
+              </div>
             </div>
+            <div class="row">
+              <div class="12u">
+                <div id="copyright">
+                  <ul class="menu">
+                    <li>&copy; All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+
         </div>
         <!-- Scripts -->
         <script src="assets/js/jquery.min.js"></script>
