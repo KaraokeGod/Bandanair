@@ -18,102 +18,104 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
   <div id="page-wrapper">
 
     <!-- Header -->
-      <div id="header-wrapper">
-        <header id="header" class="container">
+    <div id="header-wrapper">
+      <header id="header" class="container">
 
-          <!-- Logo -->
-            <div id="logo">
-              <a href="index.html"><img src="images/BandanAir1.png" width="252" height="156.6" alt="" /></a>
-              <!--<h1><a href="index.html">BandanAir</a></h1>-->
-            </div>
+        <!-- Logo -->
+        <div id="logo">
+          <a href="index.html"><img src="images/BandanAir1.png" width="252" height="156.6" alt="" /></a>
+          <!--<h1><a href="index.html">BandanAir</a></h1>-->
+        </div>
 
-          <!-- Nav -->
-            <nav id="nav">
-              <ul>
-                <li class="current"><a href="index.html">Home</a></li>
+        <!-- Nav -->
+        <nav id="nav">
+          <ul>
+            <li class="current"><a href="index.html">Home</a></li>
 
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="founders.html">The Founders</a></li>
-                <!--<li><a href="sign-up.html">Sign Up</a></li>-->
-                <!--<li class="login"><a href="login.html">Login</a></li>-->
-                <li class="login"><a href="#">Logout</a></li>
-              </ul>
-            </nav>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="founders.html">The Founders</a></li>
+            <!--<li><a href="sign-up.html">Sign Up</a></li>-->
+            <!--<li class="login"><a href="login.html">Login</a></li>-->
+            <li class="login"><a href="#">Logout</a></li>
+          </ul>
+        </nav>
 
-        </header>
-      </div>
+      </header>
+    </div>
 
-         <div id="banner-wrapper">
-           <div id="banner" class="box container">
-             <div class="row">
-               <!--<div class="5u 12u(medium)">-->
+    <div id="banner-wrapper">
+     <div id="banner" class="box container">
+       <div class="row">
+         <!--<div class="5u 12u(medium)">-->
 
-          				<p style="font-size: 35px"> <?php
+          <p style="font-size: 35px"><?php
 
-                  include_once("./library.php"); // To connect to the database
-                  $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-                  // Check connection
-                  if (mysqli_connect_errno())
-                  {
-                   echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                   }
+                include_once("./library.php"); // To connect to the database
+                $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+                // Check connection
+                if (mysqli_connect_errno()) {
+                  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                }
 
                    //---------START OF VALIDATION------------
 
-                      $hashed_password = null;
-                      // Form the SQL query (an INSERT query)
-                      $email = $_POST['email'];
-                      $username = $_POST['username'];
-                      $password = $_POST['pass'];
-                      $twitter = $_POST['twitter'];
-                      $facebook = $_POST['facebook'];
-                      $gplus = $_POST['gplus'];
-                      $name = $_POST['name'];
-                      $phone= $_POST['phone'];
-                      $address = $_POST['address'];
-                      $city = $_POST['city'];
-                      $state = $_POST['state'];
-                      $zipcode = $_POST['zip'];
-                      $country = $_POST['country'];
-                      $hashed_password= hash('sha256',$password);
+                $hashed_password = null;
+                // Form the SQL query (an INSERT query)
+                $email = $_POST['email'];
+                $username = $_POST['username'];
+                $password = $_POST['pass'];
+                $name = $_POST['name'];
+                $phone= $_POST['phone'];
+                $address = $_POST['address'];
+                $city = $_POST['city'];
+                $state = $_POST['state'];
+                $zipcode = $_POST['zip'];
+                $hashed_password= hash('sha256',$password);
 
-                      $sql = mysqli_query($con, "SELECT * FROM users WHERE Username='$username'");
-                      if(mysqli_num_rows($sql)>=1){
-                        echo "<center><h2 style='color: red'>Registration Failure</h2></center>";
-                        echo "<h2>Username <em><strong>$username</strong></em> has already been taken.</h2>";
-                        echo "<a href='#' class='button big icon fa-arrow-circle-left' onclick='window.history.back();'><i>Back</i></a>";
-                      }
+                $usernameExists = mysqli_query($con, "SELECT * FROM users WHERE Username='$username'");
+                $emailExists = mysqli_query($con, "SELECT * FROM users WHERE Email='$email'");
+                if(mysqli_num_rows($usernameExists)>=1){
+                  echo "<center><h2 style='color: red'>Registration Failure</h2></center>";
+                  echo "<h2>Username <em><strong>$username</strong></em> has already been taken.</h2>";
+                  echo "<a href='#' class='button big icon fa-arrow-circle-left' onclick='window.history.back();'><i>Back</i></a>";
+                }
 
-                      else{
+                else if(mysqli_num_rows($emailExists)>=1){
+                  echo "<center><h2 style='color: red'>Registration Failure</h2></center>";
+                  echo "<h2>Email <em><strong>$email</strong></em> has already been registered.</h2>";
+                  echo "<a href='#' class='button big icon fa-arrow-circle-left' onclick='window.history.back();'><i>Back</i></a>";
+                }
+
+                else{
                           // session_start();
                           // $_SESSION["Email"] = $email;
-                          $sql="INSERT INTO users (Name, Email, Address, City, State, ZipCode, Username, Password, Twitter, Facebook, GooglePlus, PhoneNumber, Country)
-                          VALUES  ('$name', '$email', '$address', '$city','$state','$zipcode', '$username', '$hashed_password', '$twitter', '$facebook', '$gplus', '$phone', '$country')";
-                          if (!mysqli_query($con,$sql))
-                          {
-                            die('Error: ' . mysqli_error($con));
-                          }
-                          else
-                          {
+                  $sql="INSERT INTO users (Name, Email, Address, City, State, ZipCode, Username, Password, PhoneNumber)
+                  VALUES  ('$name', '$email', '$address', '$city','$state','$zipcode', '$username', '$hashed_password', '$phone')";
+                  if (!mysqli_query($con,$sql))
+                  {
+                    die('Error: ' . mysqli_error($con));
+                  }
+                  else
+                  {
                           //echo "Welcome $name. You are registered as $username.";
                           //echo "You have successfully registered as $username.";
                           //echo "<h1>hello $username</h1>";
-                          echo "<center><h2 style='color: green'>Success!</h2></center>";
-                          echo "<p> </p>";
-                          echo "<h2><strong>Congratulations</strong> $username</h2>";
-                          echo "<p>You are now a member of <strong>BandanAir!</strong></p>";
-                          echo "<p> </p>";
-                          echo "<a href='#' class='button big icon fa-arrow-circle-right'>Browse Products</a>";
-                          echo "<a href='#' class='button alt big icon fa-question-circle'>Your Profile</a>";
-                        }
-                      }
-                    mysqli_close($con);
-                    ?>
-                  </p>
+                    echo "<center><h2 style='color: green'>Success!</h2></center>";
+                    echo "<p> </p>";
+                    echo "<h2><strong>Congratulations</strong> $username</h2>";
+                    echo "<p>You are now a member of <strong>BandanAir!</strong></p>";
+                    echo "<p> </p>";
+                    echo "<a href='#' class='button big icon fa-arrow-circle-right'>Browse Products</a>";
+                    echo "<a href='#' class='button alt big icon fa-question-circle'>Your Profile</a>";
+                  }
+                }
+                mysqli_close($con);
+                ?>
+              </p>
 
-              </div>
             </div>
           </div>
+        </div>
 
         <!-- Footer -->
         <div id="footer-wrapper">
@@ -139,5 +141,5 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
         <script src="assets/js/main.js"></script>
 
-        </body>
-        </html>
+      </body>
+      </html>

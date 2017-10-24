@@ -2156,7 +2156,7 @@
 				width: 100%;
 				text-align: center;
 				font-size: 1.35em;
-				padding: 0.85em 0 !important;
+				padding: 0.85em 0;
 			}
 
 				input[type="button"].icon,
@@ -2164,7 +2164,7 @@
 				input[type="reset"].icon,
 				button.icon,
 				.button.icon {
-					padding-right: 0.75em !important;
+					padding-right: 0.75em;
 				}
 
 					input[type="button"].icon:before,
