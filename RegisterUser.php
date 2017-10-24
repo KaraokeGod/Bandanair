@@ -37,7 +37,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         <nav id="nav">
           <ul>
             <li class="current"><a href="index.html">Home</a></li>
-
+            <li><a href="purchase.html">Purchase</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="founders.html">The Founders</a></li>
             <!--<li><a href="sign-up.html">Sign Up</a></li>-->
