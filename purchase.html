@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/product.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
 	<body class="left-sidebar">
@@ -47,17 +48,34 @@
 						<div class="row 200%">
 							<div class="4u 12u$(medium)">
 								<div id="sidebar">
-
 									<!-- Sidebar -->
 										<section>
-											<img src="images/bandana.jpeg" width="400" height="400" alt="" />
-										</section>
+											<div class="slideshow-container">
+												<div class="slide fade">
+													<div class="numbertext">1/3</div>
+													<img src="images/bandana_red.jpeg" width="100%" height="400" alt="" />
+													<div class="text">Red</div>
+												</div>
+												<div class="slide fade">
+													<div class="numbertext">2/3</div>
+													<img src="images/bandana_blue.jpeg" width="400" height="400" alt="" />
+													<div class="text">Blue</div>
+												</div>
+												<div class="slide fade">
+													<div class="numbertext">3/3</div>
+													<img src="images/bandana_black.jpg" width="400" height="400" alt="" />
+													<div class="text">Black</div>
+												</div>
 
-										<section>
-											<h2>Product Details</h2>
-											<h3>Includes one (1) synthetic microfilter bandana<h3>
-											<h3>Price: ₿0.0001</h3>
-											<h3>Free Shipping</h3>
+												<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+												<a class="next" onclick="plusSlides(1)">&#10095;</a>
+											</div>
+											<br>
+											<div style="text-align:center">
+												<span class="dot" onclick="currentSlide(1)"></span>
+												<span class="dot" onclick="currentSlide(2)"></span>
+												<span class="dot" onclick="currentSlide(3)"></span>
+											</div>
 										</section>
 								</div>
 							</div>
@@ -67,13 +85,12 @@
 									<!-- Content -->
 										<article>
 
-											<h2>Purchase</h2>
+											<h2>Classic Bandana</h2>
 
-											<p>BandanAir exists to provide a product that addresses these hazards, and do so in a bold way. Using cutting edge filtration technology, we were able to design a sleek bandana that combines the stylish patterns of the modern rave scene with fibrous materials that both block out dust and air particles from entering your body, and a combination of space age fibers that provide an optimized air flow to ensure clear breathing in music festivals.</p>
-
-											<p>We are a company based on style, safety, and constant innovation; providing new products that can enhance your experience in music festivals. We are the first and only clear-breathing face mask company in the world. And as music and EDM culture changes, so too will we to provide you with the best possible product.</p>
-
-											<a href="#" class="image featured"><img src="images/festival.png" alt="" /></a>
+											<h3>Product Details</h3>
+											<h4>Includes one (1) synthetic microfilter bandana</h4>
+											<h4>Price: 0.0001 BTC</h4>
+											<h4>Free Shipping</h4>
 
 										</article>
 
@@ -149,6 +166,7 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/product.js"></script>
 
 	</body>
 </html>
