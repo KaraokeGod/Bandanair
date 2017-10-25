@@ -90,3 +90,101 @@
 	from {opacity: .4}
 	to {opacity: 1}
 }
+
+.product-name {
+	text-rendering: optimizeLegibility;
+	font-size: 30px!important;
+	font-weight: bold;
+}
+
+.details {
+	text-rendering: optimizeLegibility;
+	font-size: 20px!important;
+	font-weight: bold;
+	font-color: black;
+}
+
+.price {
+	text-rendering: optimizeLegibility;
+	font-size: 20px!important;
+	font-color: black;
+	font-weight: normal;
+}
+
+.a-size-medium {
+	text-rendering: optimizeLegibility;
+	font-size: 20px!important;
+	line-height: 1.255!important;
+	font-weight: bold;
+}
+
+.a-color-success {
+	color: #008a00!important;
+}
+
+.a-color-price {
+	color: #B12704!important;
+}
+
+#prodDetails .prodDetTable {
+	table-layout: fixed;
+	border-spacing: 0;
+	padding: 0;
+}
+
+#prodDetails .prodDetSectionEntry {
+	width: 50%!important;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+table.a-keyvalue td, table.a-keyvalue th {
+	padding: 7px 14px 6px;
+	border-top: 1px solid #e7e7e7;
+	border-right: 1px solid #e7e7e7;
+	border-left: 1px solid #e7e7e7;
+}
+
+table.a-keyvalue th {
+	background-color: #f3f3f3;
+	font-weight: bold;
+}
+
+.a-size-base {
+	font-size: 16px!important;
+	line-height: 19px!important;
+}
+
+.a-color-secondary {
+	color: #555!important;
+}
+
+th {
+	text-align: left;
+}
+
+td, th {
+	vertical-align: top;
+	display: table-cell;
+}
+
+
+table.a-keyvalue {
+	border-bottom: 1px solid #e7e7e7;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table: last-child {
+	margin-bottom: 0!important;
+}
+
+table {
+	display: table;
+	border-color: grey;
+}
+
+
