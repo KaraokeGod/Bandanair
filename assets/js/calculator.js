@@ -57,6 +57,17 @@
             }
         }
         function calc(left, right, trigger) {
+            var Httpreq = new XMLHttpRequest(); // a new request
+            Httpreq.open("GET",'https://api.coindesk.com/v1/bpi/currentprice.json',false);
+            Httpreq.send(null);
+            var test =  Httpreq.responseText; 
+            var data = JSON.parse(test);
+            var bpi = data.bpi;
+            var usd = bpi.USD;
+            var eur = bpi.EUR;
+            var usdr = parseFloat(usd.rate.replace(/,/g, ''));
+            var eurr = parseFloat(eur.rate.replace(/,/g, ''));
+            var lastprices = {"BTC:USD":usdr.toString(), "BTC:EUR":eurr.toString()};
             var pair = $leftCurrency.val().toUpperCase() + ':' + $rightCurrency.val().toUpperCase();
             var price = lastprices[pair] || 0;
             var pArray = pair.split(':');
