@@ -35,7 +35,6 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 							<ul>
 								<li><a href="index.html">Home</a></li>
             					<li><a href="purchase.html">Purchase</a></li>
-					            <li><a href="converter.html">Bitcoin Converter</a></li>
 					            <li><a href="about.html">About Us</a></li>
 					            <li><a href="sign-up.html">Sign Up</a></li>
 					            <li class="login"><a href="login.html">Login</a></li>
