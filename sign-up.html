@@ -36,28 +36,28 @@
 
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email.");
-    } 
+    }
     else if (username==="") {
       alert("Please enter a username.");
-    } 
+    }
     else if (pass != cpass) {
       alert("Passwords do not match.");
-    } 
+    }
     else if (!passwordRegex.test(pass)) {
       alert("Password must be at least 6 alphanumeric and/or special characters.");
-    } 
+    }
     else if (!textRegex.test(name)) {
       alert("Name must be text-only.");
-    } 
+    }
     else if (!phoneRegex.test(phone)) {
       alert("Phone number must contain only digits and match one of these formats: 'XXXXXXXXXX' 'XXX-XXX-XXXX' 'XXX.XXX.XXXX' 'XXX XXX XXXX'");
     }
     else if(!addressRegex.test(address)) {
       alert("Address must only contain text, numbers, or periods.")
-    } 
+    }
     else if (!textRegex.test(city)) {
       alert("City be text-only.");
-    } 
+    }
     else if (!zipRegex.test(zip)) {
       alert("Zip code must be 5 digits.");
     }
@@ -85,10 +85,9 @@
         <nav id="nav">
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="purchase.html">Purchase</a></li>
             <li><a href="about.html">About Us</a></li>
             <li class="current"><a href="sign-up.html">Sign Up</a></li>
-            <li class="login"><a href="login.html">Login</a></li>
+            <li class="login"><a href="login.php">Login</a></li>
           </ul>
         </nav>
       </header>
@@ -158,10 +157,9 @@
             <h3>Sitemap</h3>
             <ul class="style2">
               <li><a href="index.html">Home</a></li>
-              <li><a href="purchase.html">Purchase</a></li>
               <li><a href="about.html">About Us</a></li>
               <li><a href="sign-up.html">Sign Up</a></li>
-              <li><a href="login.html">Login</a></li>
+              <li><a href="login.php">Login</a></li>
             </ul>
           </section>
 

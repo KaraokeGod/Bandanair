@@ -1,4 +1,14 @@
-<!DOCTYPE HTML>
+<?php
+// Starting session
+session_start();
+if(!isset($_SESSION['username'])){
+  echo "Forbidden 403. Not Logged In. Redirecting to Home Page.";
+  header('Refresh: 2; URL = index.html');
+  exit;
+}
+// Accessing session data
+//echo 'Hi, ' . $_SESSION["username"];
+?>
 <!--
 	Verti by HTML5 UP
 	html5up.net | @ajlkn
@@ -25,17 +35,19 @@
 				<!-- Logo -->
 				<div id="logo">
 					<!--<h1><a href="index.html">BandanAir</a></h1>-->
-					<a href="index.html"><img src="images/BandanAir1.png" width="252" height="156.6" alt="" /></a>
+					<a href="profile.php"><img src="images/BandanAir1.png" width="252" height="156.6" alt="" /></a>
 				</div>
 
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li class="current"><a href="purchase.html">Purchase</a></li>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="sign-up.html">Sign Up</a></li>
-						<li class="login"><a href="login.html">Login</a></li>
+            <li><a href="profile.php">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li class="current"><a href="logged_in_purchase.php">Purchase</a></li>
+            <li><a href="logged_in_about.html">About Us</a></li>
+            <!--<li><a href="sign-up.html">Sign Up</a></li>-->
+            <!--<li class="login"><a href="login.html">Login</a></li>-->
+            <li class="login"><a href="logout.php">Logout</a></li>
 					</ul>
 				</nav>
 
@@ -210,7 +222,7 @@
 								<a id="buy-link" class="buy-link button icon fa-info-circle"href="https://www.coinbase.com/">Buy Bitcoins Now</a>
 							</div>
 						</div>
-					</article>		
+					</article>
 				</div>
 			</div>
 		</div>
@@ -222,7 +234,7 @@
 	<footer id="footer" class="container">
 		<div class="row">
 			<div class="3u 6u(medium) 12u$(small)">
-				<a href="index.html"><img src="images/BandanAir1.png" width="252" height="156.6" alt="" /></a>
+				<a href="profile.php"><img src="images/BandanAir1.png" width="252" height="156.6" alt="" /></a>
 			</div>
 			<div class="3u 6u$(medium) 12u$(small)">
 
@@ -243,11 +255,9 @@
 				<section class="widget links">
 					<h3>Sitemap</h3>
 					<ul class="style2">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="purchase.html">Purchase</a></li>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="sign-up.html">Sign Up</a></li>
-						<li><a href="login.html">Login</a></li>
+            <li><a href="profile.php">Home</a></li>
+            <li><a href="logged_in_purchase.php">Purchase</a></li>
+            <li><a href="logged_in_about.html">About Us</a></li>
 					</ul>
 				</section>
 
