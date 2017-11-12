@@ -21,7 +21,6 @@ if(!isset($_SESSION['username'])) {
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 </head>
 
-<!-- TODO: Add an on-load to populate form -->
 <body class="left-sidebar">
 	<div id="page-wrapper">
 
@@ -47,10 +46,44 @@ if(!isset($_SESSION['username'])) {
 			</header>
 		</div>
 
+		<?php
+			$name = '';
+			$address = '';
+			$city = '';
+			$state = '';
+			$zip = '';
+			$phone = '';
+			$email = '';
+			require_once("./library.php");
+			$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+
+			if(mysqli_connect_errno()){
+				echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			}
+
+			if (isset($_SESSION['username'])) {
+				$username = $_SESSION['username'];
+				$query = "SELECT * FROM users WHERE Username='$username'";
+				$result = $con->query($query);
+				if ($result->num_rows > 0) {
+					$row = mysqli_fetch_array($result);
+					$name = $row['Name'];
+					$address = $row['Address'];
+					$city = $row['City'];
+					$state = $row['State'];
+					$zip = $row['ZipCode'];
+					$phone = $row['PhoneNumber'];
+					$email = $row['Email'];
+				}
+			}
+
+			mysqli_close($con);
+		?>
+
 		<!-- Main -->
 		<div id="main-wrapper">
 			<div class="container">
-				<form method="post" id="profileForm" action="" onsubmit="">
+				<form method="post" id="profileForm" action="updateProfile.php" onSubmit="window.location.reload()">
 					<div class="form_table">
 						<div class="q full_width">
 							<div class="segment_header" style="width:auto;text-align:Left;">
@@ -67,38 +100,37 @@ if(!isset($_SESSION['username'])) {
 						<div class="q required">
 							<label class="question top_question" for="nameField">Name&nbsp;
 							<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="text" name="nameField" class="text_field" id="nameField" size="40" maxlength="40" value="" />
+							<input type="text" name="nameField" class="text_field" id="nameField" size="40" maxlength="40" value="<?php echo $name; ?>" />
 						</div>
 						<div class="clear"></div>
 						<div class="q required">
 							<label class="question top_question" for="addressField">Address &nbsp;
 							<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="text" name="addressField" class="text_field" id="addressField" size="60" maxlength="60" value="" />
+							<input type="text" name="addressField" class="text_field" id="addressField" size="60" maxlength="60" value="<?php echo $address; ?>" />
 						</div>
 						<div class="clear"></div>
 						<div class="q required">
 							<label class="question top_question" for="cityField">City&nbsp;
 							<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="text" name="cityField" class="text_field" id="cityField"  size="50" maxlength="50" value="" />
+							<input type="text" name="cityField" class="text_field" id="cityField"  size="50" maxlength="50" value="<?php echo $city ?>" />
 						</div>
 						<div class="q required">
 						<!-- TODO: Add State dropdown for this field -->
 							<label class="question top_question" for="stateField">State&nbsp;<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="text" name="stateField" class="text_field" id="stateField"  size="30" maxlength="30" value="" />
+							<input type="text" name="stateField" class="text_field" id="stateField"  size="30" maxlength="30" value="<?php echo $state; ?>" />
 						</div>
 						<div id="q8" class="q required">
 							<label class="question top_question" for="zipField">Zip&nbsp;<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="text" name="zipField" class="text_field" id="zipField"  size="10" maxlength="15" value="" />
+							<input type="text" name="zipField" class="text_field" id="zipField"  size="10" maxlength="15" value="<?php echo $zip; ?>" />
 						</div>
 						<div class="clear"></div>
 						<div id="q9" class="q required">
 							<label class="question top_question" for="phoneField">Phone Number&nbsp;<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="text" name="phoneField" class="text_field" id="phoneField"  size="25" maxlength="255" value="" />
+							<input type="text" name="phoneField" class="text_field" id="phoneField"  size="25" maxlength="255" value="<?php echo $phone; ?>" />
 						</div>
-						<div class="clear"></div>
 						<div id="q10" class="q required">
 							<label class="question top_question" for="emailField">Email Address&nbsp;<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="email" name="emailField" class="text_field" id="emailField"  size="50" maxlength="255" value="" />
+							<input type="email" name="emailField" class="text_field" id="emailField"  size="50" maxlength="255" value="<?php echo $email; ?>" />
 						</div>
 						<div class="clear"></div>
 						<div class="outside_container">
@@ -177,9 +209,6 @@ if(!isset($_SESSION['username'])) {
 <script src="assets/js/util.js"></script>
 <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
-<script src="assets/js/product.js"></script>
-<script src="assets/js/calculator.js"></script>
-<script src="assets/js/currencyProfile.js"></script>
 
 </body>
 </html>
