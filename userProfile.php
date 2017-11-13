@@ -10,6 +10,76 @@ if(!isset($_SESSION['username'])) {
 
 ?>
 
+<?php
+	$name = '';
+	$address = '';
+	$city = '';
+	$state = '';
+	$zip = '';
+	$phone = '';
+	$email = '';
+	require_once("./library.php");
+	$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+
+	if(mysqli_connect_errno()){
+		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+
+	if (isset($_SESSION['username'])) {
+		$username = $_SESSION['username'];
+
+		// Submitted form
+		if (isset($_POST['submitButton'])) {
+			if ($_POST['nameField']) {
+				$name = $_POST['nameField'];
+			}
+
+			if ($_POST['addressField']) {
+				$address = $_POST['addressField'];
+			}
+
+			if ($_POST['cityField']) {
+				$city = $_POST['cityField'];
+			}
+
+			if ($_POST['stateField']) {
+				$state = $_POST['stateField'];
+			}
+
+			if ($_POST['zipField']) {
+				$zip = $_POST['zipField'];
+			}
+
+			if ($_POST['phoneField']) {
+				$phone = $_POST['phoneField'];
+			}
+
+			if ($_POST['emailField']) {
+				$email = $_POST['emailField'];
+			}
+
+			$query = "UPDATE users SET Name='$name', Address='$address', City='$city', State='$state', ZipCode='$zip', PhoneNumber='$phone', Email='$email' WHERE Username='$username'";
+			$result = $con->query($query);
+		}
+		else {
+			$query = "SELECT * FROM users WHERE Username='$username'";
+			$result = $con->query($query);
+			if ($result->num_rows > 0) {
+				$row = mysqli_fetch_array($result);
+				$name = $row['Name'];
+				$address = $row['Address'];
+				$city = $row['City'];
+				$state = $row['State'];
+				$zip = $row['ZipCode'];
+				$phone = $row['PhoneNumber'];
+				$email = $row['Email'];
+			}
+		}
+	}
+
+	mysqli_close($con);
+?>
+
 <html>
 <head>
 	<title>BandanAir</title>
@@ -19,9 +89,75 @@ if(!isset($_SESSION['username'])) {
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/profile.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	<script>
+	  	function validateForm() {
+		    var email    = document.forms["profileForm"]["emailField"].value;
+		    var name    = document.forms["profileForm"]["nameField"].value;
+		    var phone   = document.forms["profileForm"]["phoneField"].value;
+		    var address = document.forms["profileForm"]["addressField"].value;
+		    var city    = document.forms["profileForm"]["cityField"].value;
+		    var state   = document.forms["profileForm"]["stateField"].value;
+		    var zip     = document.forms["profileForm"]["zipField"].value;
+
+		    var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		    var passwordRegex = /^[A-Za-z0-9!@#$%^&*()_]{6,}/;
+		    var textRegex = /^[a-zA-Z\s]*$/;
+		    var phoneRegex = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+		    var addressRegex = /^[A-Za-z0-9#\.\s]*$/;
+		    var zipRegex = /^\d{5}$/;
+
+		    if (!emailRegex.test(email)) {
+		      alert("Please enter a valid email.");
+		    }
+		    else if (name == "") {
+		    	alert("Please enter a name");
+		    }
+		    else if (!textRegex.test(name)) {
+		      alert("Name must be text-only.");
+		    }
+		    else if (!phoneRegex.test(phone)) {
+		      alert("Phone number must contain only digits and match one of these formats: 'XXXXXXXXXX' 'XXX-XXX-XXXX' 'XXX.XXX.XXXX' 'XXX XXX XXXX'");
+		    }
+		    else if (address == "") {
+		    	alert("Please enter an address.");
+		    }
+		    else if (city == "") {
+		    	alert("Please enter a city.");
+		    }
+		    else if (state == "") {
+		    	alert("Please select a state.");
+		    }
+		    else if (zip == "") {
+		    	alert("Please enter a zip code.");
+		    }
+		    else if (phone == "") {
+		    	alert("Please enter a phone number.");
+		    }
+		    else if (email == "") {
+		    	alert("Please enter an email address.");
+		    }
+		    else if(!addressRegex.test(address)) {
+		      alert("Address must only contain text, numbers, or periods.")
+		    }
+		    else if (!textRegex.test(city)) {
+		      alert("City be text-only.");
+		    }
+		    else if (!zipRegex.test(zip)) {
+		      alert("Zip code must be 5 digits.");
+		    }
+		    else {
+		      return true;
+		    }
+		    return false;
+		}
+
+	  	function setSelect() {
+	  		document.getElementById('stateField').value = '<?php echo $state ?>';
+	  	}
+	</script>
 </head>
 
-<body class="left-sidebar">
+<body class="left-sidebar" onload="setSelect()">
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -46,44 +182,12 @@ if(!isset($_SESSION['username'])) {
 			</header>
 		</div>
 
-		<?php
-			$name = '';
-			$address = '';
-			$city = '';
-			$state = '';
-			$zip = '';
-			$phone = '';
-			$email = '';
-			require_once("./library.php");
-			$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-
-			if(mysqli_connect_errno()){
-				echo "Failed to connect to MySQL: " . mysqli_connect_error();
-			}
-
-			if (isset($_SESSION['username'])) {
-				$username = $_SESSION['username'];
-				$query = "SELECT * FROM users WHERE Username='$username'";
-				$result = $con->query($query);
-				if ($result->num_rows > 0) {
-					$row = mysqli_fetch_array($result);
-					$name = $row['Name'];
-					$address = $row['Address'];
-					$city = $row['City'];
-					$state = $row['State'];
-					$zip = $row['ZipCode'];
-					$phone = $row['PhoneNumber'];
-					$email = $row['Email'];
-				}
-			}
-
-			mysqli_close($con);
-		?>
+		
 
 		<!-- Main -->
 		<div id="main-wrapper">
 			<div class="container">
-				<form method="post" id="profileForm" action="updateProfile.php" onSubmit="window.location.reload()">
+				<form method="post" id="profileForm" action="userProfile.php" onSubmit="return validateForm()">
 					<div class="form_table">
 						<div class="q full_width">
 							<div class="segment_header" style="width:auto;text-align:Left;">
@@ -117,7 +221,9 @@ if(!isset($_SESSION['username'])) {
 						<div class="q required">
 						<!-- TODO: Add State dropdown for this field -->
 							<label class="question top_question" for="stateField">State&nbsp;<b class="icon_required" style="color:#FF0000">*</b></label>
-							<input type="text" name="stateField" class="text_field" id="stateField"  size="30" maxlength="30" value="<?php echo $state; ?>" />
+							<select name="stateField" class="text_field" id="stateField" >
+								<option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Guam">Guam</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Northern Marianas Islands">Northern Marianas Islands</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Puerto Rico">Puerto Rico</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Virgin Islands">Virgin Islands</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option>
+							</select>
 						</div>
 						<div id="q8" class="q required">
 							<label class="question top_question" for="zipField">Zip&nbsp;<b class="icon_required" style="color:#FF0000">*</b></label>
@@ -135,7 +241,7 @@ if(!isset($_SESSION['username'])) {
 						<div class="clear"></div>
 						<div class="outside_container">
 							<div class="buttons_reverse">
-								<input type="submit" name="Submit" value="Submit" class="submit_button" id="formSubmit"/>
+								<input type="submit" name="submitButton" value="Submit" class="submit_button" id="formSubmit"/>
 							</div>
 						</div>
 					</div>
