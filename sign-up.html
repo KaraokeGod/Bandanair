@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/signup.css">
+  <link rel="stylesheet" href="assets/css/main.css">
   <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
   <style>
   .error {color: #FF0000;}
@@ -104,27 +104,37 @@
         <!--<p><span class="error">* required field.</span></p>-->
         <!-- fieldsets -->
         <fieldset>
-          <h2 class="fs-title">Create your account</h2>
-          <h3 class="fs-subtitle">New credentials only.</h3>
+          <h2 style="margin-bottom:0px; margin-top:10px;">Create Account</h2>
+          <h4 style="font-weight:normal;">New credentials only.</h4>
+          <h4 class="label">Email</h4>
           <input type="email" name="email" placeholder="Email" autocomplete="email"/>
+          <h4 class="label">Username</h4>
           <input type="text" name="username" placeholder="Username" autocomplete="username"/>
+          <h4 class="label">Password</h4>
           <input type="password" name="pass" placeholder="Password"/>
-          <input type="password" name="cpass" placeholder="Confirm Password"/>
+          <h4 class="label">Confirm Password</h4>
+          <input type="password" name="cpass" placeholder="Password"/>
           <input type="button" name="next" class="next action-button" value="Next"/>
         </fieldset>
         <fieldset>
-          <h2 class="fs-title">Personal Details</h2>
-          <h3 class="fs-subtitle">Your information's safe with us.</h3>
-          <input type="text" name="name" placeholder="Your Name" autocomplete="name" required/>
+          <h2 style="margin-bottom:0px; margin-top:10px;">Personal Details</h2>
+          <h4 style="font-weight:normal;">Your information's safe with us.</h4>
+          <h4 class="label">Name</h4>
+          <input type="text" name="name" placeholder="Full Name" autocomplete="name" required/>
+          <h4 class="label">Phone Number</h4>
           <input type="text" name="phone" placeholder="Phone Number" autocomplete="tel-national" required/>
+          <h4 class="label">Street Address</h4>
           <input name="address" placeholder="Address" autocomplete="street-address" required/>
+          <h4 class="label">City</h4>
           <input type="text" name="city" placeholder="City" autocomplete="address-level2" required/>
+          <h4 class="label">State</h4>
           <select id="state" name="state" autocomplete="address-level1" required>
               <option value="">---</option><option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Guam">Guam</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Northern Marianas Islands">Northern Marianas Islands</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Puerto Rico">Puerto Rico</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Virgin Islands">Virgin Islands</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option>
           </select>
+          <h4 class="label">Zip Code</h4>
           <input type="text" name="zip" placeholder="Zip Code" autocomplete="postal-code" required/>
-          <input type="button" name="previous" class="previous action-button" value="Previous" />
-          <button href="RegisterUser.php" type="submit" class="action-button">Submit</button>
+          <input type="button" name="previous" class="previous action-button" value="Previous"/>
+          <button href="RegisterUser.php" type="submit" class="action-button" style="padding-top:15px; padding-bottom:16px; font-weight:normal; font-size:14px;">Submit</button>
         </fieldset>
 
       </form>

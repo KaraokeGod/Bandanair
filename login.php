@@ -1,6 +1,6 @@
 <?php
-   ob_start();
-   session_start();
+ob_start();
+session_start();
 ?>
 
 <?
@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
     <style>
-      .loginMessage{
+    .loginMessage{
         color: red;
-      }
-    </style>
+    }
+</style>
 </head>
 <body class="no-sidebar">
     <div id="page-wrapper">
@@ -48,46 +48,46 @@
             </header>
         </div>
         <div id="background-wrapper">
-            <div class="login-page">
+            <div class="login-page" style="padding-top:0px;">
                 <div class = "container form-signin">
 
                    <?php
-                      $msg = '';
-                      require_once("./library.php");
-                      $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+                   $msg = '';
+                   require_once("./library.php");
+                   $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
-                      if (mysqli_connect_errno()){
-                        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                      }
+                   if (mysqli_connect_errno()){
+                    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                }
 
-                      if (isset($_POST['login']) && !empty($_POST['username'])
-                         && !empty($_POST['password'])) {
+                if (isset($_POST['login']) && !empty($_POST['username'])
+                 && !empty($_POST['password'])) {
 
-                            $username = $_POST['username'];
-                        		$_SESSION['username'] = $username;
-                        		$password = $_POST['password'];
-                        		$passHash = password_hash($password, PASSWORD_DEFAULT);
-                        		$query1 = "SELECT * FROM users WHERE Username='$username'";
-                        		$result = $con->query($query1);
-                        		if($result->num_rows == 1) {
-                        			$row = mysqli_fetch_array($result);
-                        			if(password_verify($password,$row['Password'])){
+                    $username = $_POST['username'];
+                $_SESSION['username'] = $username;
+                $password = $_POST['password'];
+                $passHash = password_hash($password, PASSWORD_DEFAULT);
+                $query1 = "SELECT * FROM users WHERE Username='$username'";
+                $result = $con->query($query1);
+                if($result->num_rows == 1) {
+                   $row = mysqli_fetch_array($result);
+                   if(password_verify($password,$row['Password'])){
 
-                        				echo "<script> window.location.assign('profile.php'); </script>";
-                        			}
-                        			else{
+                    echo "<script> window.location.assign('profile.php'); </script>";
+                }
+                else{
                                 //$msg = 'Wrong username or password';
-                        				$message = "Password Incorrect.\\nTry Again.";
-                        				echo "<script type='text/javascript'>alert('$message');</script>";
-                        			}
-                        		}
+                    $message = "Password incorrect.\\nPlease try again.";
+                    echo "<script type='text/javascript'>alert('$message');</script>";
+                }
+            }
                         		//Username does not exists
-                        			else{
-                        				$message = "Username Does Not Exist.\\nTry Again.";
-                        				echo "<script type='text/javascript'>alert('$message');</script>";
-                        			}
-                        		}
-                        			mysqli_close($con);
+            else{
+                $message = "Username does not exist.\\nPlease try again.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+            }
+        }
+        mysqli_close($con);
 
 
                          // if ($_POST['username'] == 'tutorialspoint' &&
@@ -103,23 +103,26 @@
                          //    $msg = 'Wrong username or password';
                          // }
                       //}
-                   ?>
+        ?>
 
 
 
-                </div>
-                <h4 class = "form-signin-heading loginMessage"><?php echo $msg; ?></h4>
-                <form class = "form-signin login-form" role = "form"
-                   action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
-                   ?>" method = "post">
-                   <input type = "text" class = "form-control"
-                      name = "username" placeholder = "Username"
-                      required autofocus></br>
-                   <input type = "password" class = "form-control"
-                      name = "password" placeholder = "Password" required>
-                   <button class = "btn btn-lg btn-primary btn-block" type = "submit"
-                      name = "login">Login</button>
+                    </div>
+                    <!--<h4 class = "form-signin-heading loginMessage"><?php echo $msg; ?></h4>-->
+                    <form class = "form-signin login-form" role = "form"
+                    action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
+                    ?>" method = "post">
+                    <h2 style="color:white;">Login</h2>
+                    <input type = "text" class = "form-control"
+                    name = "username" placeholder = "Username"
+                    required autofocus></br>
+                    <input type = "password" class = "form-control"
+                    name = "password" placeholder = "Password" required>
+                    <br/>
+                    <center><button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                    name = "login" style="width:100%;">Log In</button></center>
                 </form>
+
 
                 <!--<div class="msform" method="post">
                     <form class="login-form">
@@ -132,7 +135,15 @@
             </div>
 
         </div>
-        <center><p class="message">Not registered? <a href="sign-up.html">Create an account</a></p></center>
+        <center>
+        <br/>
+        <p class="message" style="font-size:20px; margin-bottom:0px;">
+            Not registered? <a href="sign-up.html">Create an account</a>
+        </p>
+        <p class="message" style="font-size:20px;">
+            Forgot password? <a href="sign-up.html">Get temporary password</a>
+        </p>
+        </center>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script src="assets/js/login.js"></script>
     </div>

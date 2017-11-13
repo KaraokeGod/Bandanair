@@ -244,11 +244,11 @@ if(!isset($_SESSION['username'])) {
 
 		<!-- Main -->
 		<div id="main-wrapper">
-			<div class="container">
+			<div class="container" style="border-radius:6;">
 				<form method="post" id="profileForm" action="userProfile.php" onSubmit="return validateForm()">
 					<div class="form_table">
-						<div class="q full_width">
-							<div class="segment_header" style="width:auto;text-align:Left;">
+						<div class="q full_width" >
+							<div class="segment_header" style="width:auto;text-align:Left; border-radius:6px;">
 								<h1 style="color:white;font-size:30px;padding:20px 1em;">Edit Personal Information</h1>
 							</div>
 						</div>
@@ -308,7 +308,7 @@ if(!isset($_SESSION['username'])) {
 				<form method="post" id="passwordForm" action="userProfile.php" onSubmit="return validatePasswordForm()">
 					<div class="form_table">
 						<div class="q full_width">
-							<div class="segment_header" style="width:auto;text-align:Left;">
+							<div class="segment_header" style="width:auto;text-align:Left; border-radius:6px;">
 								<h1 style="color:white;font-size:30px;padding:20px 1em;">Change Your Password</h1>
 							</div>
 						</div>

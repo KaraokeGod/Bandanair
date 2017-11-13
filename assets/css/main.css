@@ -1855,15 +1855,17 @@
 	}
 
 	#background-wrapper {
-		background-image: url('../../images/edm-festival.jpg');
-		background-size: 100%;
+		background-image: url('../../images/edm-festival3.png');
+		background-size: cover;
+		background-position: center 0;
 		box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
 		padding: 5em 0 5em 0;
 	}
 
 	#background-wrapper2 {
-		background-image: url('../../images/edm-festival2.jpg');
-		background-size: 100%;
+		background-image: url('../../images/edm-festival4.png');
+		background-size: cover;
+		background-position: center 0;
 		box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
 		padding: 5em 0 5em 0;
 		min-height: 1050px !important;
@@ -1908,7 +1910,7 @@
 		position: absolute;
 		right: 0;
 		top: 0;
-		font-size: 0.9em;
+		font-size: 1.1em;
 	}
 
 		#nav ul li {

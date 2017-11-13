@@ -9,7 +9,7 @@ html {
 }
 /*form styles*/
 #msform {
-	width: 400px;
+	width: 500px;
 	margin: 50px auto;
 	text-align: center;
 	position: relative;
@@ -17,7 +17,7 @@ html {
 #msform fieldset {
 	background: white;
 	border: 0 none;
-	border-radius: 3px;
+	border-radius: 6px;
 	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 	padding: 20px 30px;
 	box-sizing: border-box;
@@ -33,9 +33,10 @@ html {
 }
 /*inputs*/
 #msform input, #msform textarea, #msform select {
-	padding: 15px;
+	padding: 5px;
+	padding-left:10px;
 	border: 1px solid #ccc;
-	border-radius: 3px;
+	border-radius: 6px;
 	margin-bottom: 10px;
 	width: 100%;
 	box-sizing: border-box;
@@ -50,13 +51,18 @@ html {
 	font-weight: bold;
 	color: white;
 	border: 0 none;
-	border-radius: 1px;
+	border-radius: 6px;
 	cursor: pointer;
 	padding: 10px 5px;
 	margin: 10px 5px;
 }
+
 #msform .action-button:hover, #msform .action-button:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#msform .label {
+	text-align:left;
 }
 /*headings*/
 .fs-title {
