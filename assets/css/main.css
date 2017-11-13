@@ -1866,6 +1866,7 @@
 		background-size: 100%;
 		box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
 		padding: 5em 0 5em 0;
+		min-height: 1050px !important;
 	}
 /* Header */
 
