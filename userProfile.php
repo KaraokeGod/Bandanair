@@ -249,14 +249,14 @@ if(!isset($_SESSION['username'])) {
 					<div class="form_table">
 						<div class="q full_width">
 							<div class="segment_header" style="width:auto;text-align:Left;">
-								<h1 style="color:white;font-size:30px;padding:20px 1em;">Edit Your Personal Information</h1>
+								<h1 style="color:white;font-size:30px;padding:20px 1em;">Edit Personal Information</h1>
 							</div>
 						</div>
 						<div class="q full_width">
 							<div class="full_width_space">
-								<div> 
-									This form allows you to edit your personal information.
-								</div>
+								<h4 style="margin-left:10px;"><i>
+									This form allows you to update your personal information.
+								</i></h4>
 							</div>
 						</div>
 						<div class="q required">
@@ -314,9 +314,9 @@ if(!isset($_SESSION['username'])) {
 						</div>
 						<div class="q full_width">
 							<div class="full_width_space">
-								<div> 
-									Change your password by confirming your existing password and specifying your new password.
-								</div>
+								<h4 style="margin-left:10px;"><i>
+									Change your password by confirming your old password and specifying your new password.
+								</i></h4>
 							</div>
 						</div>
 						<div class="q required">
@@ -326,11 +326,13 @@ if(!isset($_SESSION['username'])) {
 						</div>
 						<div class="clear"></div>
 						<div class="q required">
-							<label class="question top_question" for="newPassField">New Password&nbsp;</label>
+							<label class="question top_question" for="newPassField">New Password&nbsp;
+							<b class="icon_required" style="color:#FF0000">*</b></label>
 							<input type="password" name="newPassField" class="text_field" id="newPassField"  size="50" maxlength="255"/>
 						</div>
 						<div class="q required">
-							<label class="question top_question" for="confNewPassField">Confirm New Password&nbsp;</label>
+							<label class="question top_question" for="confNewPassField">Confirm New Password&nbsp;
+							<b class="icon_required" style="color:#FF0000">*</b></label>
 							<input type="password" name="confNewPassField" class="text_field" id="confNewPassField"  size="50" maxlength="255"/>
 						</div>
 						<div class="clear"></div>
