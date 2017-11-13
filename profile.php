@@ -61,7 +61,7 @@ if(!isset($_SESSION['username'])){
                     echo "<h2><strong>Welcome Back, </strong>" . $_SESSION["username"] . "</h2>";
                     echo "<p> </p>";
                     echo "<a href='logged_in_purchase.php' class='button big icon fa-arrow-circle-right'>Browse Products</a>";
-                    echo "<a href='#' class='button alt big icon fa-question-circle'>Your Profile</a>";
+                    echo "<a href='userProfile.php' class='button alt big icon fa-question-circle'>Your Profile</a>";
 
                 ?>
               </p>
