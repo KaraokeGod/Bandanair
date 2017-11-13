@@ -83,6 +83,7 @@ a {
     color: #fff;
     font-size: 22px;
     border-radius: 2px;
+    z-index: 1;
 }
 
 .btc-calculator .form-holder .calc-col .buy-link:hover {
@@ -107,6 +108,7 @@ a {
     margin-left: 0;
     padding-left: 0;
     background: #fff;
+    z-index: 2;
 }
 
 .btc-calculator .form-holder .calc-col .fiat-list a {

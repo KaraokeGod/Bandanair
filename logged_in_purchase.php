@@ -42,7 +42,7 @@ if(!isset($_SESSION['username'])){
 				<nav id="nav">
 					<ul>
             <li><a href="profile.php">Home</a></li>
-            <li><a href="#">Profile</a></li>
+            <li><a href="userProfile.php">Profile</a></li>
             <li class="current"><a href="logged_in_purchase.php">Purchase</a></li>
             <li><a href="logged_in_about.html">About Us</a></li>
             <!--<li><a href="sign-up.html">Sign Up</a></li>-->
