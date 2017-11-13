@@ -17,6 +17,13 @@ session_start();
     <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    <?php
+      use PHPMailer\PHPMailer\PHPMailer;
+      use PHPMailer\PHPMailer\Exception;
+
+        //Load composer's autoloader
+      require 'vendor/autoload.php';?>
+
     <style>
     .loginMessage{
         color: red;
@@ -42,7 +49,7 @@ session_start();
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="sign-up.html">Sign Up</a></li>
-                        <li class="current"><a href="login.php">Login</a></li>
+                        <li class="login"><a href="login.php">Login</a></li>
                     </ul>
                 </nav>
             </header>
@@ -50,44 +57,74 @@ session_start();
         <div id="background-wrapper">
             <div class="login-page" style="padding-top:0px;">
                 <div class = "container form-signin">
-
                    <?php
-                   $msg = '';
-                   require_once("./library.php");
-                   $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+                        $msg = '';
+                        require_once("./library.php");
+                        $con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
-                   if (mysqli_connect_errno()){
-                    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-                }
+                        if (mysqli_connect_errno()) {
+                            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+                        }
 
-                if (isset($_POST['login']) && !empty($_POST['username'])
-                 && !empty($_POST['password'])) {
+                        if (isset($_POST['login']) && !empty($_POST['username'])
+                            && !empty($_POST['email'])) {
 
-                    $username = $_POST['username'];
-                $_SESSION['username'] = $username;
-                $password = $_POST['password'];
-                $passHash = password_hash($password, PASSWORD_DEFAULT);
-                $query1 = "SELECT * FROM users WHERE Username='$username'";
-                $result = $con->query($query1);
-                if($result->num_rows == 1) {
-                   $row = mysqli_fetch_array($result);
-                   if(password_verify($password,$row['Password'])){
+                            $username = $_POST['username'];
+                            $email = $_POST['email'];
+                            $query = "SELECT * FROM users WHERE Username='$username'";
+                            $result = $con->query($query);
+                            if($result->num_rows == 1) {
+                                $row = mysqli_fetch_array($result);
 
-                    echo "<script> window.location.assign('profile.php'); </script>";
-                }
-                else{
-                                //$msg = 'Wrong username or password';
-                    $message = "Password incorrect.\\nPlease try again.";
-                    echo "<script type='text/javascript'>alert('$message');</script>";
-                }
-            }
+                                if($row["Email"] == $email) {
+                                    $message = "Password changed.\\nYour new password has been sent to " . $email;
+                                    $message = $message . "\\nYou can change your password in your profile.";
+                                    echo "<script type='text/javascript'>alert('$message');</script>";
+
+                                    $bytes = openssl_random_pseudo_bytes(10);
+                                    $new_pass = substr(preg_replace("/[^a-zA-Z0-9]/", "", base64_encode($bytes)), 0, 9);
+
+                                    $newPassHash = password_hash($new_pass, PASSWORD_DEFAULT);
+                                    $query = "UPDATE users SET Password='$newPassHash' WHERE Username='$username'";
+                                    $result = $con->query($query);
+
+                                    $mail = new PHPMailer;
+                                    $mail->isSMTP();
+                                    $mail->SMTPDebug = 0;
+                                    $mail->Host = 'smtp.gmail.com';
+                                    $mail->Port = 587;
+                                    $mail->SMTPSecure = 'tls';
+                                    $mail->SMTPAuth = true;
+                                    $mail->IsHTML(true);
+                                    $mail->Username = "bandanair2017@gmail.com";
+                                    $mail->Password = "ecommerce";
+                                    $mail->setFrom('bandanair2017@gmail.com', 'Bandanair');
+                                    $mail->addAddress($email, "Bandanair User");
+                                    $mail->addEmbeddedImage('images/BandanAirThumbnail.png', 'Logo');
+                                    $mail->Subject = 'BandanAir Password Changed';
+                                    $mail->Body    = '
+                                    <h3>Your BandanAir password has been changed.</h3>
+                                    <h3>Please log in using your username:</h3><h2>' . $username . '</h2>
+                                    <h3>and your new password:</h3><h2>' . $new_pass . '</h2><br/>
+                                    <h1>Thanks for shopping at BandanAir!</h1>
+                                    <img src="cid:Logo"/>';
+                                    $mail->send();
+
+                                    $pwd = bin2hex($bytes);
+                                }
+                                else{
+                                                //$msg = 'Wrong username or password';
+                                    $message = "Email incorrect.\\nPlease try again.";
+                                    echo "<script type='text/javascript'>alert('$message');</script>";
+                                }
+                            }
                         		//Username does not exists
-            else{
-                $message = "Username does not exist.\\nPlease try again.";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-            }
-        }
-        mysqli_close($con);
+                            else {
+                                $message = "Username does not exist.\\nPlease try again.";
+                                echo "<script type='text/javascript'>alert('$message');</script>";
+                            }
+                        }
+                        mysqli_close($con);
 
 
                          // if ($_POST['username'] == 'tutorialspoint' &&
@@ -102,25 +139,24 @@ session_start();
                          // }else {
                          //    $msg = 'Wrong username or password';
                          // }
-                      //}
-        ?>
+                              //}
+                    ?>
 
 
 
-                    </div>
-                    <!--<h4 class = "form-signin-heading loginMessage"><?php echo $msg; ?></h4>-->
-                    <form class = "form-signin login-form" role = "form"
-                    action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
-                    ?>" method = "post">
-                    <h2 style="color:white;">Login</h2>
+                </div>
+                <!--<h4 class = "form-signin-heading loginMessage"></h4>-->
+                <form class = "form-signin login-form" role="form" method="post" id="passwordForm" action="newpassword.php">
+                    <center>
+                    <h2 style="margin-bottom:0px; color:white;">Get New Password</h2>
+                    <h4 style="margin-bottom:10px;color:white;">Your new password will be emailed.</h4>
                     <input type = "text" class = "form-control"
-                    name = "username" placeholder = "Username"
-                    required autofocus></br>
-                    <input type = "password" class = "form-control"
-                    name = "password" placeholder = "Password" required>
+                    name = "username" placeholder = "Username" required autofocus></br>
+                    <input type = "text" class = "form-control"
+                    name = "email" placeholder = "Email" required>
                     <br/>
-                    <center><button class = "btn btn-lg btn-primary btn-block" type = "submit"
-                    name = "login" style="width:100%;">Log In</button></center>
+                    <button class = "btn btn-lg btn-primary btn-block" type = "submit"
+                    name = "login" style="width:100%;">Send New Password</button></center>
                 </form>
 
 
@@ -139,9 +175,6 @@ session_start();
         <br/>
         <p class="message" style="font-size:20px; margin-bottom:0px;">
             Not registered? <a href="sign-up.html">Create an account</a>
-        </p>
-        <p class="message" style="font-size:20px;">
-            Forgot password? <a href="newpassword.php">Get new password</a>
         </p>
         </center>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
